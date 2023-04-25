@@ -1,7 +1,26 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { object, string } from "yup";
+
+const schema = object({
+  user: string().required("Campo Obrigatorio").min(6, "Minimo de 6 digitos").email("Email inválido"),
+  senha: string().required("Campo Obrigatorio")
+
+});
 
 export default function Home() {
+  const {
+    register,
+    handleSubmit: onSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+  console.log(errors);
+  const handleSubmit = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <main
       className="bg-gray-800 h-screen
@@ -23,22 +42,34 @@ export default function Home() {
                            text-white
                       mt-[30px] "
             action="/"
+            onSubmit={onSubmit(handleSubmit)}
           >
-            <label className="text-center">Email</label>
+            <div className="flex flex-col">
             <input
               className="h-[30px] w-[300px] rounded-lg mt-[10px]
                         text-black text-center"
-              type="email"
-              name="user"
+              {...register("user")}
+              type="text"
               id="user"
-              required
+              placeholder="Email"
             />
-            <label className="text-center mt-[10px]">Senha</label>
+          
+            <span className="text-red-500 rounded-lg p-1 ">
+                {errors?.user?.message?.toString()}
+              </span>
+            </div>
+            <div className="flex flex-col">
             <input
               className="h-[30px] w-[300px] rounded-lg mt-[10px] text-black text-center"
+              {...register("senha")}
               type="password"
-              required
+              id="senha"
+              placeholder="Senha"
             />
+            <span className="text-red-500 rounded-lg p-1 ">
+                {errors?.senha?.message?.toString()}
+              </span>
+            </div>
             <button
               type="submit"
               className="mt-[30px]

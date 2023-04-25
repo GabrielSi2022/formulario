@@ -1,21 +1,29 @@
-import { FormEvent, useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 //Yup
 
-import { object, string } from "yup";
+import { boolean, object, ref, string } from "yup";
+
+//CPF Validator
+
+import {cpf} from "cpf-cnpj-validator";
+
 
 const schema = object({
-  firstName: string()
-    .required("Campo Obrigatorio")
-    .min(3, "Minimo de 3 digitos"),
-  lastName: string().required("Campo Obrigatorio"),
-  email: string().required("Campo Obrigatorio"),
-  cpf: string().required("Campo Obrigatorio"),
-  senha: string().required("Campo Obrigatorio"),
-  repetirsenha: string().required("Campo Obrigatorio"),
-  termo: string().required("Campo Obrigatorio"),
+  firstName: string().required("Campo Obrigatorio").min(3, "Minimo de 3 digitos"),
+  lastName: string().required("Campo Obrigatorio").min(3,"Minimo de 3 digitos"),
+  email: string().required("Campo Obrigatorio").min(6,"minimo 6 digitos").email("O seu email é valido"),
+  cpf: string().test((value: any) => cpf.isValid(value)),
+  senha: string()
+  .required("Campo Obrigatorio")
+  .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+  'mínimo 6 caracteres, ' +
+  'uma letra maiúscula e uma letra minúscula, ' +
+  'um número e um caracter especial'),
+  repetirsenha: string().required("Campo Obrigatorio").oneOf([ref('senha')],"A senhas devem ser iguais"),
+  termo: boolean().oneOf([true], "Você tem que aceitar os termos de compromisso")
 });
 
 export default function Registro() {
@@ -36,7 +44,7 @@ export default function Registro() {
                       flex justify-center items-center"
     >
       <div
-        className="w-[500px] h-max p-[20px] bg-gray-600  
+        className="w-[500px] h-max p-[20px] bg-gray-200  
                       flex items-center justify-center flex-col rounded-lg"
       >
         <h1
@@ -50,100 +58,103 @@ export default function Registro() {
             onSubmit={onSubmit(handleSubmit)}
             className="flex flex-col items-center
                            text-white
-                      mt-[30px] gap-[10px] "
+                      mt-[30px] gap-[5px] "
             action="/"
           >
-            <div>
+            <div className="flex flex-col text-center">
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-black pl-[10px]"
+                        text-white pl-[10px] placeholder-white
+                         bg-gray-800"
                 {...register("firstName")}
                 type="text"
                 id="firstName"
-                placeholder="Nome :"
+                placeholder="Nome "
               />
               <span className="text-red-500 rounded-lg p-1 ">
                 {errors?.firstName?.message?.toString()}
               </span>
             </div>
 
-            <div>
+            <div className="flex flex-col text-center">
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-black pl-[10px]"
+                        text-white pl-[10px] placeholder-white bg-gray-800"
                 {...register("lastName")}
                 type="text"
                 id="lastName"
-                placeholder="Sobrenome :"
+                placeholder="Sobrenome "
               />
               <span className=" text-red-500 rounded-lg p-1">
                 {errors?.lastName?.message?.toString()}
               </span>
             </div>
 
-            <div>
+            <div className="flex flex-col text-center">
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-black pl-[10px]"
+                        text-white pl-[10px] placeholder-white bg-gray-800"
                 {...register("email")}
-                type="email"
+                type="text"
                 id="email"
-                placeholder="E-mail :"
+                placeholder="E-mail "
               />
               <span className="text-red-500 rounded-lg p-1">
                 {errors?.email?.message?.toString()}
               </span>
             </div>
 
-            <div>
+            <div className="flex flex-col text-center">
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-black pl-[10px]"
+                        text-white pl-[10px] placeholder-white bg-gray-800"
                 {...register("cpf")}
                 type="text"
                 id="cpf"
-                placeholder="CPF :"
+                placeholder="CPF "
               />
               <span className="text-red-500 rounded-lg p-1">
                 {errors?.cpf?.message?.toString()}
               </span>
             </div>
 
-            <div>
+            <div className="flex flex-col text-center">
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-black pl-[10px]"
+                        text-white pl-[10px] placeholder-white bg-gray-800"
                 {...register("senha")}
                 type="password"
                 id="senha"
-                placeholder="Senha :"
+                placeholder="Senha "
               />
               <span className="text-red-500 rounded-lg p-1">
                 {errors?.senha?.message?.toString()}
               </span>
             </div>
-            <div>
+            <div className="flex flex-col text-center">
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-black pl-[10px]"
+                        text-white pl-[10px] placeholder-white bg-gray-800"
                 {...register("repetirsenha")}
                 type="password"
                 id="repetirsenha"
-                placeholder="Repetir Senha :"
+                placeholder="Confirmar Senha "
               />
               <span className="text-red-500 rounded-lg p-1">
                 {errors?.repetirsenha?.message?.toString()}
               </span>
             </div>
 
-            <div className="flex items-center mt-[20px] ">
+            <div className="flex flex-col items-center mt-[20px] text-black">
+              <div className="flex ">
               <label>Aceitar Termos:</label>
               <input
-                className=" rounded-lg flex w-10 mt-[4px] "
+                className=" rounded-lg flex w-10  "
                 {...register("termo")}
                 type="checkbox"
                 id="termo"
               />
+              </div>
               <span className="text-red-500 rounded-lg p-1">
                 {errors?.termo?.message?.toString()}
               </span>
