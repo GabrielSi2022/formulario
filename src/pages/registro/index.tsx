@@ -7,7 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 
 const schema = object({
-  firstName: string().required("Campo Obrigatorio"),
+  firstName: string()
+    .required("Campo Obrigatorio")
+    .min(3, "Minimo de 3 digitos"),
   lastName: string().required("Campo Obrigatorio"),
   email: string().required("Campo Obrigatorio"),
   cpf: string().required("Campo Obrigatorio"),
@@ -48,70 +50,91 @@ export default function Registro() {
             onSubmit={onSubmit(handleSubmit)}
             className="flex flex-col items-center
                            text-white
-                      mt-[30px] "
+                      mt-[30px] gap-[10px] "
             action="/"
           >
-            <input
-              className="h-[30px] w-[300px] rounded-lg mt-[10px]
+            <div>
+              <input
+                className="h-[30px] w-[300px] rounded-lg 
                         text-black pl-[10px]"
-              {...register("firstName")}
-              type="text"
-              id="firstName"
-              placeholder="Nome :"
-            />
-            <span className="text-red-500 rounded-lg p-1 mt-[10px]">
-              {errors?.firstName?.message?.toString()}
-            </span>
+                {...register("firstName")}
+                type="text"
+                id="firstName"
+                placeholder="Nome :"
+              />
+              <span className="text-red-500 rounded-lg p-1 ">
+                {errors?.firstName?.message?.toString()}
+              </span>
+            </div>
 
-            <input
-              className="h-[30px] w-[300px] rounded-lg mt-[10px]
+            <div>
+              <input
+                className="h-[30px] w-[300px] rounded-lg 
                         text-black pl-[10px]"
-              {...register("lastName")}
-              type="text"
-              id="lastName"
-              placeholder="Sobrenome :"
-            />
-            <span className="">{String(errors?.lastName?.message)}</span>
+                {...register("lastName")}
+                type="text"
+                id="lastName"
+                placeholder="Sobrenome :"
+              />
+              <span className=" text-red-500 rounded-lg p-1">
+                {errors?.lastName?.message?.toString()}
+              </span>
+            </div>
 
-            <input
-              className="h-[30px] w-[300px] rounded-lg mt-[10px]
+            <div>
+              <input
+                className="h-[30px] w-[300px] rounded-lg 
                         text-black pl-[10px]"
-              {...register("email")}
-              type="email"
-              id="email"
-              placeholder="E-mail :"
-            />
-            <span className="">{String(errors?.email?.message)}</span>
+                {...register("email")}
+                type="email"
+                id="email"
+                placeholder="E-mail :"
+              />
+              <span className="text-red-500 rounded-lg p-1">
+                {errors?.email?.message?.toString()}
+              </span>
+            </div>
 
-            <input
-              className="h-[30px] w-[300px] rounded-lg mt-[10px]
+            <div>
+              <input
+                className="h-[30px] w-[300px] rounded-lg 
                         text-black pl-[10px]"
-              {...register("cpf")}
-              type="text"
-              id="cpf"
-              placeholder="CPF :"
-            />
-            <span className="">{String(errors?.cpf?.message)}</span>
+                {...register("cpf")}
+                type="text"
+                id="cpf"
+                placeholder="CPF :"
+              />
+              <span className="text-red-500 rounded-lg p-1">
+                {errors?.cpf?.message?.toString()}
+              </span>
+            </div>
 
-            <input
-              className="h-[30px] w-[300px] rounded-lg mt-[10px]
+            <div>
+              <input
+                className="h-[30px] w-[300px] rounded-lg 
                         text-black pl-[10px]"
-              {...register("senha")}
-              type="password"
-              id="senha"
-              placeholder="Senha :"
-            />
-            <span className="">{String(errors?.senha?.message)}</span>
-
-            <input
-              className="h-[30px] w-[300px] rounded-lg mt-[10px]
+                {...register("senha")}
+                type="password"
+                id="senha"
+                placeholder="Senha :"
+              />
+              <span className="text-red-500 rounded-lg p-1">
+                {errors?.senha?.message?.toString()}
+              </span>
+            </div>
+            <div>
+              <input
+                className="h-[30px] w-[300px] rounded-lg 
                         text-black pl-[10px]"
-              {...register("repetirsenha")}
-              type="password"
-              id="repetirsenha"
-              placeholder="Repetir Senha :"
-            />
-            <span className="">{String(errors?.repetirsenha?.message)}</span>
+                {...register("repetirsenha")}
+                type="password"
+                id="repetirsenha"
+                placeholder="Repetir Senha :"
+              />
+              <span className="text-red-500 rounded-lg p-1">
+                {errors?.repetirsenha?.message?.toString()}
+              </span>
+            </div>
 
             <div className="flex items-center mt-[20px] ">
               <label>Aceitar Termos:</label>
@@ -121,6 +144,9 @@ export default function Registro() {
                 type="checkbox"
                 id="termo"
               />
+              <span className="text-red-500 rounded-lg p-1">
+                {errors?.termo?.message?.toString()}
+              </span>
             </div>
 
             <div className="flex gap-3">
