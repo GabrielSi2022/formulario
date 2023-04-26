@@ -88,7 +88,7 @@ export default function Home() {
               pt-[5px] pb-[5px] bg-orange-600
               rounded-lg w-[120px]"
             >
-              Loguin
+              Login
             </button>
           </form>
         </div>
