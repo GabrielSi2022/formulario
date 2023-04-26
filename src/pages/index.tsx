@@ -106,7 +106,7 @@ export default function Home() {
       <div
         className="w-1/2 flex justify-center
                        max-[768px]:h-full max-[768px]:w-full
-                       max-[768px]:items-start "
+                       max-[768px]:items-center max-[768px]:justify-center "
       >
         <Image src={logo} alt="" className="w-auto" width={350} />
       </div>
