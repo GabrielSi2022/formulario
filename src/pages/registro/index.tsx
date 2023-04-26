@@ -16,6 +16,7 @@ import logo from "../../../public/logo-gabriel.png";
 
 //link next
 import Link from "next/link";
+import test from "node:test";
 
 const schema = object({
   firstName: string()
@@ -28,7 +29,7 @@ const schema = object({
     .required("Campo Obrigatorio")
     .min(6, "minimo 6 digitos")
     .email("O seu email é valido"),
-  cpf: string().test((value: any) => {
+  cpf: string().test("testecpf", "Cpf Invalido", (value: any) => {
     if (value.length != 0) {
       return cpf.isValid(value);
     } else {
