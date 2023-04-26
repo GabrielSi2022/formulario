@@ -32,17 +32,19 @@ export default function Home() {
     <main
       className="bg-gray-800 h-screen
                       flex justify-start
-                       items-center"
+                       items-center
+                       max-[768px]:flex-col-reverse max-[768px]:h-screen"
     >
       <div
         className="w-1/2 h-full p-[20px] bg-gray-200  
-                      flex items-center justify-center flex-col rounded-lg"
+                      flex items-center justify-center flex-col rounded-lg
+                     max-[768px]:w-full max-[768px]:rounded-none max-[768px]:h-full"
       >
         <h1
           className="text-orange-600 font-bold font-mono
                          text-4xl"
         >
-          Faça seu Login:
+          Faça seu Login
         </h1>
         <div className="w-full">
           <form
@@ -101,8 +103,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-1/2 flex justify-center">
-        <Image src={logo} alt="" className="w-auto " width={350} />
+      <div
+        className="w-1/2 flex justify-center
+                       max-[768px]:h-full max-[768px]:w-full
+                       max-[768px]:items-start "
+      >
+        <Image src={logo} alt="" className="w-auto" width={350} />
       </div>
     </main>
   );

@@ -65,15 +65,17 @@ export default function Registro() {
   return (
     <main
       className="bg-gray-800 h-screen
-                      flex justify-start items-center"
+                      flex justify-start items-center
+                      max-[768px]:flex-col-reverse max-[768px]:h-screen"
     >
       <div
         className="w-1/2 h-full p-[20px] bg-gray-200  
-                      flex items-center justify-center flex-col "
+                      flex items-center justify-center flex-col
+                      max-[768px]:w-full max-[768px]:rounded-none max-[768px]:h-full "
       >
         <h1
-          className="text-orange-600 font-bold font-mono
-                         text-4xl"
+          className="text-orange-600 font-bold font-mono text-4xl
+                          max-[400px]:text-center  max-[400px]:text-[30px]"
         >
           Faça seu Cadastro
         </h1>
@@ -85,11 +87,15 @@ export default function Registro() {
                       mt-[30px] gap-[5px] "
             action="/"
           >
-            <div className="flex flex-col text-center">
+            <div
+              className="flex flex-col text-center
+                            max-[400px]:w-full"
+            >
               <input
                 className="h-[30px] w-[300px] rounded-lg 
                         text-white pl-[10px] placeholder-white
-                         bg-gray-800"
+                         bg-gray-800
+                          max-[400px]:w-full"
                 {...register("firstName")}
                 type="text"
                 id="firstName"
@@ -100,10 +106,14 @@ export default function Registro() {
               </span>
             </div>
 
-            <div className="flex flex-col text-center">
+            <div
+              className="flex flex-col text-center
+                            max-[400px]:w-full"
+            >
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-white pl-[10px] placeholder-white bg-gray-800"
+                        text-white pl-[10px] placeholder-white bg-gray-800
+                            max-[400px]:w-full"
                 {...register("lastName")}
                 type="text"
                 id="lastName"
@@ -114,10 +124,14 @@ export default function Registro() {
               </span>
             </div>
 
-            <div className="flex flex-col text-center">
+            <div
+              className="flex flex-col text-center
+                            max-[400px]:w-full"
+            >
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-white pl-[10px] placeholder-white bg-gray-800"
+                        text-white pl-[10px] placeholder-white bg-gray-800
+                          max-[400px]:w-full"
                 {...register("email")}
                 type="text"
                 id="email"
@@ -128,10 +142,14 @@ export default function Registro() {
               </span>
             </div>
 
-            <div className="flex flex-col text-center">
+            <div
+              className="flex flex-col text-center
+                            max-[400px]:w-full"
+            >
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-white pl-[10px] placeholder-white bg-gray-800"
+                        text-white pl-[10px] placeholder-white bg-gray-800
+                           max-[400px]:w-full"
                 {...register("cpf")}
                 type="text"
                 id="cpf"
@@ -142,10 +160,14 @@ export default function Registro() {
               </span>
             </div>
 
-            <div className="flex flex-col text-center">
+            <div
+              className="flex flex-col text-center
+                             max-[400px]:w-full"
+            >
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-white pl-[10px] placeholder-white bg-gray-800"
+                        text-white pl-[10px] placeholder-white bg-gray-800
+                         max-[400px]:w-full"
                 {...register("senha")}
                 type="password"
                 id="senha"
@@ -155,10 +177,14 @@ export default function Registro() {
                 {errors?.senha?.message?.toString()}
               </span>
             </div>
-            <div className="flex flex-col text-center">
+            <div
+              className="flex flex-col text-center
+                             max-[400px]:w-full"
+            >
               <input
                 className="h-[30px] w-[300px] rounded-lg 
-                        text-white pl-[10px] placeholder-white bg-gray-800"
+                        text-white pl-[10px] placeholder-white bg-gray-800
+                         max-[400px]:w-full"
                 {...register("repetirsenha")}
                 type="password"
                 id="repetirsenha"
@@ -179,7 +205,7 @@ export default function Registro() {
                   id="termo"
                 />
               </div>
-              <span className="text-red-500 rounded-lg p-1">
+              <span className="text-red-500 rounded-lg p-1 text-center">
                 {errors?.termo?.message?.toString()}
               </span>
             </div>
@@ -206,7 +232,10 @@ export default function Registro() {
         </div>
       </div>
 
-      <div className="w-1/2 flex justify-center">
+      <div
+        className="w-1/2 flex justify-center
+            max-[768px]:hidden "
+      >
         <Image src={logo} alt="" className="w-auto " width={350} />
       </div>
     </main>
