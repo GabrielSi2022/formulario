@@ -16,7 +16,6 @@ import logo from "../../../public/logo-gabriel.png";
 
 //link next
 import Link from "next/link";
-import test from "node:test";
 
 const schema = object({
   firstName: string()

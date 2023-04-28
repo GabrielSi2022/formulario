@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 
@@ -7,6 +8,7 @@ import { object, string } from "yup";
 
 import Image from "next/image";
 import logo from "/public/logo-gabriel.png";
+import { Login } from "@/services/firebase";
 
 const schema = object({
   user: string()
@@ -17,6 +19,30 @@ const schema = object({
 });
 
 export default function Home() {
+  const router = useRouter();
+
+  //////Login com conta Google.
+  // async function signInWithGoogle() {
+  //   try {
+  //     const provider = new firebase.auth.GoogleAuthProvider();
+  //     const result = await auth.signInWithPopup(provider);
+
+  //     router.push("/login");
+
+  //     return result;
+  //   } catch (error) {}
+  // }
+
+  // const loginComEmailSenha = async (user: any, senha: any) => {
+  //   try {
+  //     await signInWithEmailAndPassword(auth, user, senha);
+  //     console.log(user, senha);
+  //     return router.push("/login");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const {
     register,
     handleSubmit: onSubmit,
@@ -24,8 +50,10 @@ export default function Home() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   console.log(errors);
-  const handleSubmit = (data: any) => {
-    console.log(data);
+  const handleSubmit = async (user: any, password: any) => {
+    Login({ user, password })
+      .then(() => router.push("/login"))
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -96,9 +124,20 @@ export default function Home() {
         <div className="mt-[30px]">
           <p className="text-black">
             Ainda nao possui conta?{" "}
-            <Link href="/registro" className=" hover:text-orange-500">
+            <Link
+              href="/registro"
+              className=" text-orange-500
+                          hover:text-orange-600"
+            >
               Cadastre aqui
             </Link>
+          </p>
+        </div>
+
+        <div className="mt-[5px]">
+          <p className="text-black">
+            Ou logue com sua conta{" "}
+            {/* <button onClick={signInWithGoogle}> Google</button> */}
           </p>
         </div>
       </div>
